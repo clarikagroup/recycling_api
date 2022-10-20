@@ -1,18 +1,17 @@
-import * as dotenv from 'dotenv' 
-dotenv.config()
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 import "reflect-metadata";
-import express from 'express'
+import express from 'express';
 import { InversifyExpressServer } from "inversify-express-utils";
-import  recyclingContainer from './inversify.config'
-import "./api/v1/InfoController"
+import  recyclingContainer from './inversify.config';
 import bodyParser  from "body-parser";
 
-const app = express();
-app.use(bodyParser.urlencoded({extended:false}))
-app.use(express.json());
+import './api'
 
-console.log(process.env.PORT);
+const app = express();
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(express.json());
 
 let server = new InversifyExpressServer(recyclingContainer, null, { rootPath: "/api"}, app);
 let appToRun = server.build();
