@@ -3,9 +3,10 @@ import express from 'express'
 import { InversifyExpressServer } from "inversify-express-utils";
 import  recyclingContainer from './inversify.config'
 import "./api/v1/InfoController"
-
+import bodyParser  from "body-parser";
 
 const app = express();
+app.use(bodyParser.urlencoded({extended:false}))
 app.use(express.json());
 
 let server = new InversifyExpressServer(recyclingContainer, null, { rootPath: "/api"}, app);
